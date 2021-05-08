@@ -40,7 +40,7 @@ services:
     links:
       - db
     ports:
-      - 8081:81
+      - ${DB_PORT:-81}:81
     volumes:
       - /sessions
 
