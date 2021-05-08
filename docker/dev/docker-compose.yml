@@ -12,13 +12,6 @@ services:
     volumes:
       - php-fpm-socket:/var/run/php-fpm
       - ../..:/var/www/app
-    environment:
-      - DB_CONNECTION=mysql
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=${DB_NAME:-airport_lounges}
-      - DB_USERNAME=${DB_USER:-develop}
-      - DB_PASSWORD=${DB_PASS:-secret}
     depends_on:
       - mail
 
@@ -30,6 +23,7 @@ services:
       - ${DB_PORT:-3306}:3306
     volumes:
       - db-store:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d 
     environment:
       - MYSQL_DATABASE=${DB_NAME:-airport_lounges}
       - MYSQL_USER=${DB_USER:-develop}
