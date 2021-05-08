@@ -30,6 +30,20 @@ services:
       - MYSQL_PASSWORD=${DB_PASS:-secret}
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=develop
+      - PMA_PASSWORD=secret
+    links:
+      - db
+    ports:
+      - 8081:81
+    volumes:
+      - /sessions
+
   redis:
     image: redis:6.0.8
     ports:
