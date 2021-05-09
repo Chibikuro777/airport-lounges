@@ -34,13 +34,13 @@ services:
     image: phpmyadmin/phpmyadmin
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=mysql
-      - PMA_USER=develop
-      - PMA_PASSWORD=secret
+      - PMA_HOST=db
+      - PMA_USER=${DB_USER:-develop}
+      - PMA_PASSWORD=${DB_PASS:-secret}
     links:
       - db
     ports:
-      - ${DB_PORT:-81}:81
+      - ${PHPMYADMIN_PORT:-81}:80
     volumes:
       - /sessions
 
