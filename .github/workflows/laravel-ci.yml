@@ -10,7 +10,25 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install
+        run: composer install
+
+      - name: Run php-cs-fixer
+        run: ./vendor/bin/php-cs-fixer fix ./app
+
+      - uses: stefanzweifel/git-auto-commit-action@v2.1.0
+        with:
+          commit_message: Apply php-cs-fixer changes
+          branch: ${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   phpunit:
+    needs: [php-cs-fixer]
     runs-on: ubuntu-latest
     services:
       mysql:
