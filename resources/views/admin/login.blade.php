@@ -37,6 +37,16 @@
         <img class="mb-4" src="{{ asset('img/master_admin.jpeg') }}" alt="" width="100%" height="100%">
         <h1 class="h3 mb-3 fw-normal">管理画面</h1>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="form-floating">
         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">メールアドレス</label>

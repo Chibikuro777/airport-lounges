@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\LoginRequest;
 
 class AdminController extends Controller
 {
-    public function admin_login()
+    public function admin_show(LoginRequest $request)
     {
-        return view('admin.login');
+        if ($request->all()) {
+            return redirect('admin.login')->withErrors($request);
+        }
     }
 }
