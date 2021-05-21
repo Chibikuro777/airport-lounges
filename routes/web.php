@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.welcome');
+});
+
+Route::get('/admin/login', function () {
+    return view('admin.login_page');
+});
+
+Route::get('/login', function () {
+    return view('users.login_page');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
