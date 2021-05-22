@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,6 @@ Route::get('/', function () {
     return view('users.welcome');
 });
 
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');
 
 Route::get('/login', function () {
     return view('users.login_page');
@@ -30,6 +30,11 @@ Route::get('/dashboard', function () {
 
 // require __DIR__ . '/auth.php';
 
-// Auth::routes();
+Auth::routes();
 
-// Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
+Route::get('/admin/home', function () {
+    return view('admin.home');
+})->name('admin_home');
+
+Route::get('/admin', [AdminController::class, 'show']);
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');

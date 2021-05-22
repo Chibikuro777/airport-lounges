@@ -8,13 +8,8 @@
     <meta name="generator" content="Hugo 0.83.1">
     <title>{{ config('app.name') }}</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
-
-
-    <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -31,10 +26,7 @@
         }
       }
     </style>
-
     
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
@@ -43,11 +35,25 @@
     <img class="mb-4" src="{{ asset('images/admin_logo.jpeg') }}" alt="" width="200" height="200">
     <h1 class="h3 mb-3 fw-normal">Master管理画面</h1>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    @if (session('login_error'))
+        <div class="alert alert_danger">
+            {{ session('login_error') }}
+        </div>
+    @endif
+
     <div class="form-floating">
       <input type="id" class="form-control" id="floatingInput" placeholder="ID">
-      @foreach($data as $d)
-      <li>{{ $d->id }}</li>
-      @endforeach
+        
       <label for="floatingInput">ID</label>
     </div>
     <div class="form-floating">
