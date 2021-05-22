@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AdminUsersTable extends Migration
+class AdminUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AdminUsersTable extends Migration
     public function up()
     {
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->id();
-            $table->text('email');
-            $table->text('password');
+            $table->string('id');
+            $table->string('password');
         });
     }
 
