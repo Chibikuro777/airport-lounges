@@ -31,17 +31,15 @@
   <body class="text-center">
     
 <main class="form-signin">
-  <form>
+  <form action="{{ route('admin_login') }}" methid="POST">
     <img class="mb-4" src="{{ asset('images/admin_logo.jpeg') }}" alt="" width="200" height="200">
     <h1 class="h3 mb-3 fw-normal">Master管理画面</h1>
 
     @if ($errors->any())
     <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+      @foreach ($errors->all() as $error)
+          <li class="list-unstyled">{{ $error }}</li>
+      @endforeach
     </div>
     @endif
 
