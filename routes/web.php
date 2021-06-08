@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,28 +15,38 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('users.welcome');
-// });
+// ユーザー
+Route::namespace('Users')->prefix('users')->name('users.')->group(function () {
 
-//ユーザー画面
-Route::get('/login', function () {
-    return view('users.login_page');
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
+
+    // ログイン認証後
+    Route::middleware('auth:users')->group(function () {
+
+        // TOPページ
+        Route::get('home', [App\Http\Controllers\Users\HomeController::class, 'index']);
+    });
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+// 管理者
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
-// require __DIR__ . '/auth.php';
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
 
-Auth::routes();
+    // ログイン認証後
+    Route::middleware('auth:admin')->group(function () {
 
-//adminのホーム画面
-Route::get('/admin/home', function () {
-    return view('admin.home');
-})->name('admin_home');
-
-//adminログイン画面
-Route::get('/admin', [AdminController::class, 'show']);
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');
+        // TOPページ
+        Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index']);
+    });
+});

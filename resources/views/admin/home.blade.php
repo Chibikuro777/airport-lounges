@@ -29,7 +29,7 @@
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <form action ="{{ route('admin.login') }}" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
 
