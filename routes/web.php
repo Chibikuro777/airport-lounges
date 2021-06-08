@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +15,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// ユーザー
+Route::namespace('Users')->prefix('users')->name('users.')->group(function () {
+
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
+
+    // ログイン認証後
+    Route::middleware('auth:users')->group(function () {
+
+        // TOPページ
+        Route::get('home', [App\Http\Controllers\Users\HomeController::class, 'index']);
+    });
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// 管理者
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
-require __DIR__ . '/auth.php';
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
 
-Auth::routes();
+    // ログイン認証後
+    Route::middleware('auth:admin')->group(function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        // TOPページ
+        Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index']);
+    });
+});
