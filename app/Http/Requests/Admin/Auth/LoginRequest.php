@@ -30,7 +30,8 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator): void {
+    public function withValidator($validator): void
+    {
         $validator->after(function ($validator) {
             $user = User::where('email', $this->email)->first();
             if (! $user || !password_verify($this->password, $user->password)) {
