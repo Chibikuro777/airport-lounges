@@ -14,3 +14,4 @@ npm-debug.log
 yarn-error.log
 .php-cs-fixer.cache
 /database/seeders
+/storage/debugbar
