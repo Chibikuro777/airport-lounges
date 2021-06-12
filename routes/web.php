@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');
 
-require __DIR__ . '/auth.php';
+// Route::get('/login', function () {
+//     return view('users.login_page');
+// });
 
-Auth::routes();
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// // require __DIR__ . '/auth.php';
+
+// // Auth::routes();
+
+// // Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
