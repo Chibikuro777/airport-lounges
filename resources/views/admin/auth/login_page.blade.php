@@ -52,7 +52,7 @@
             value="{{ old('email') }}"
             placeholder="ID"
           >
-          <label for="floatingInput">ID</label>
+          <label for="floatingInput">メールアドレス</label>
         </div>
         @error('email')
           <div class="invalid-feedback d-block mb-2">{{ $message }}</div>
