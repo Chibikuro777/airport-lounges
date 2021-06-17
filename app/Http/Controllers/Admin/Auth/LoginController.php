@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->middleware('guest:admin');
+        $this->middleware('guest:admin')->except('logout');
     }
 
     public function login()
@@ -25,6 +25,6 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         Auth::guard('admin')->attempt($request->validated());
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('dashboard');
     }
 }

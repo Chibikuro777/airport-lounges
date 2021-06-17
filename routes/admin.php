@@ -14,16 +14,13 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('users.welcome');
-});
-
 Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 
 Route::get('dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth:admin'])->name('dashboard');
+})->name('dashboard');
+
 
 // require __DIR__ . '/auth.php';
 
