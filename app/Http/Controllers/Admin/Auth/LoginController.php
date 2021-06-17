@@ -25,6 +25,7 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         Auth::guard('admin')->attempt($request->validated());
+
         return redirect()->route('dashboard');
     }
 }

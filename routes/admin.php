@@ -19,8 +19,11 @@ Route::post('login', [LoginController::class, 'store']);
 
 Route::get('dashboard', function () {
     return view('admin.dashboard');
-})->name('dashboard');
+})->middleware(['auth:admin'])->name('dashboard');
 
+Route::get('logout', function () {
+    return view('admin.login');
+});
 
 // require __DIR__ . '/auth.php';
 
